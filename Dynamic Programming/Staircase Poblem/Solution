@@ -1,1 +1,66 @@
 
+//Solution Of Staircase Problem
+
+#include <bits/stdc++.h>
+#define mod 1000000007
+using namespace std;
+long long arr[100000]={0}; //Initializing array.
+typedef long long ll;
+ll helper(ll  n)
+{
+    if(n==0) return 1;                    // Base Cases
+    if(n==1) return 1;                    // Base Case
+    if(n==2) return 2;                   // Base Case
+    if(arr[n]>0) return arr[n];          //Preventing from unnecessary calls.
+    ll ans=(helper(n-1)%mod+helper(n-2)%mod)%mod;   // Since in nth stair we can go from n-1 th stair or n-2 stair and n-1 ,n-2 will be already calculated.
+    arr[n]=ans;    //Storing answer 
+    return ans;  //Returnig answer.
+}
+int main() {
+	
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    ll ans=helper(n);
+	    cout<<ans<<endl;
+	    
+	}
+	return 0;
+}
+
+
+  -------------------------------------------------------OR------------------------------------------------
+  
+  //iterative approach
+  
+  #include <iostream>
+using namespace std;
+#define mod 1000000007
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	int arr[100000]={0};
+	    arr[0]=1;
+	    arr[1]=1;
+	    arr[2]=2;
+	    for(int i=3;i<=100000;i++)
+	    {
+	        arr[i]=(arr[i-1]+arr[i-2])%mod;
+	    }
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	   
+	    
+	    cout<<arr[n]<<endl;
+	}
+	return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
