@@ -1,1 +1,69 @@
 
+// MOST EASY PROBLEM IN DP (ASKED IN AMAZON and PAYTM)
+
+#include <iostream>
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+
+int main() {
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+	    ll n;
+	    cin>>n;
+	    ll arr[n][n];
+	    ll dp[n][n];
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<n;j++)
+	        {
+	            cin>>arr[i][j];
+	            dp[i][j]=0;
+	        }
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        dp[0][i]=arr[0][i];
+	    }
+	    for(int i=1;i<n;i++)
+	    {
+	        for(int j=0;j<n;j++)
+	        {
+	            ll a=INT_MIN;
+	            ll b=INT_MIN;
+	            if(j-1>=0)
+	            {
+	                 a=dp[i-1][j-1];
+	            }
+	            if(j+1<n)
+	            {
+	                b=dp[i-1][j+1];
+	            }
+
+	            //dp[i][j]=(max(a,max(b,dp[i-1][j])))+arr[i][j];
+	            ll t= max(dp[i-1][j],max(a,b));
+	            dp[i][j]=t+arr[i][j];
+	        }
+	    }
+	    ll ans=INT_MIN;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(ans<dp[n-1][i])
+	        {
+	            ans=dp[n-1][i];
+	        }
+	    }
+	  /*  for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                cout<<dp[i][j]<< " ";
+            }
+            cout<<endl;
+        }*/
+	    cout<<ans<<endl;
+	}
+	return 0;
+}
